@@ -189,30 +189,92 @@ CREATE TABLE users (
     PRIMARY KEY (username),
     UNIQUE KEY (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+## 
 INSERT INTO users (username, email, password) 
 VALUES ('Lamar_Admin', 'lamar@example.com', 'mypassword123');
-📜 Database Configuration & SQL FilesSQL File Content (my_website_db.sql)Save the following content as my_website_db.sql and use it for import:SQL-- phpMyAdmin SQL Dump
--- Database: my_website_db
 
-CREATE DATABASE IF NOT EXISTS my_website_db;
-USE my_website_db;
+Database Configuration File (db_config.php)The file db_config.php already contains:
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$dbname = 'my_website_db';
+$port = 3306;
+If your MySQL has a password, update the $pass variable accordingly
 
-CREATE TABLE users (
-    username VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    PRIMARY KEY (username),
-    UNIQUE KEY (email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+## Installation Steps
+Install XAMPP: Download from Apache Friends and install with default settings.
 
-INSERT INTO users (username, email, password) 
-VALUES ('Lamar_Admin', 'lamar@example.com', 'mypassword123');
-Database Configuration File (db_config.php)The file db_config.php already contains:PHP$host = 'localhost';
-$user = 'root';$pass = '';
-$dbname = 'my_website_db';$port = 3306;
-If your MySQL has a password, update the $pass variable accordingly.🚀 Installation StepsInstall XAMPP: Download from Apache Friends and install with default settings.Start Services: Open XAMPP Control Panel and start Apache and MySQL.Copy Project Files: Place all PHP files into a folder inside C:\xampp\htdocs\, for example: C:\xampp\htdocs\azure_robotics\Create or Import Database: Follow the Database Setup section above (Method 1 or Method 2).Adjust Configuration (if needed): If your MySQL root password is not empty, edit db_config.php and set $pass = 'your_password';Access the Website: Navigate to http://localhost/azure_robotics/index.php🔐 Authentication & Default CredentialsThe login system uses plain text password comparison (for demonstration purposes).Session variable $_SESSION['user'] stores the username after successful login.All protected pages check for isset($_SESSION['user']) and redirect to index.php if not set.FieldValueUsernameLamar_AdminEmaillamar@example.comPasswordmypassword123You can add more users via phpMyAdmin or SQL INSERT.📑 Page DescriptionsFileDescriptionindex.phpLogin form with username/email and password, error messages, password toggle.home.phpExplains balance control, Zero Momentum Point (ZMP), ASIMO reference. Also covers walking basics and MPC technology.walking.phpDetailed Model Predictive Control (MPC) for gait generation, LIP model, TALOS and Atlas examples.avoiding.phpOptical obstacle avoidance using Octomap/Voxel Grid, center of mass adjustment, soft vs rigid obstacles.navigating.phpSLAM (Simultaneous Localization and Mapping), global path planning (D*, Informed RRT*), footstep planning.team.phpDisplays team members (Lamar, Jana, Layan, Renad) and supervisor Dr. Mona Alawadh.logout.phpDestroys session and shows a logout confirmation page with return link.🎨 Styling and NavigationStyling: All pages use CSS with dark theme (#0A0E1A background, #2A6F9C accent), Inter font from Google Fonts, and Font Awesome 6 icons.Responsive Design: Fully responsive with media queries for screens under 768px and 900px.Sidebar Navigation: Available on home.php, walking.php, avoiding.php, navigating.php, and team.php. Open using the hamburger menu icon (three bars).💻 Development EnvironmentDevice name: shamesxProcessor: 13th Gen Intel(R) Core(TM) i7-1355U (1.70 GHz)RAM: 16.0 GB (15.7 GB usable)Graphics: NVIDIA GeForce RTX 2050 (4 GB) + Intel Iris Xe GraphicsOS: Windows 11 Home (64-bit)🛠️ Troubleshooting"Cannot connect to database": Ensure MySQL is running in XAMPP, check credentials in db_config.php, and verify my_website_db exists.Login redirects back to login page: Confirm the users table contains at least one record and $_SESSION['user'] is set correctly.White screen or PHP errors: Enable error reporting by adding this code to the top of the file:PHPerror_reporting(E_ALL);
+Start Services: Open XAMPP Control Panel and start Apache and MySQL.
+
+Copy Project Files: Place all PHP files into a folder inside C:\xampp\htdocs\, for example: C:\xampp\htdocs\azure_robotics\
+
+Create or Import Database: Follow the Database Setup section above (Method 1 or Method 2).
+
+Adjust Configuration (if needed): If your MySQL root password is not empty, edit db_config.php and set $pass = 'your_password';
+
+Access the Website: Navigate to http://localhost/azure_robotics/index.php
+
+## Authentication & Default CredentialsThe login system uses plain text password comparison (for demonstration purposes).Session variable $_SESSION['user'] stores the username after successful login.All protected pages check for isset($_SESSION['user']) and redirect to index.php if not set
+
+Field,Value
+Username,Lamar_Admin
+Email,lamar@example.com
+Password,mypassword123
+
+## File,Description
+index.php,"Login form with username/email and password, error messages, password toggle."
+home.php,"Explains balance control, Zero Momentum Point (ZMP), ASIMO reference. Also covers walking basics and MPC technology."
+walking.php,"Detailed Model Predictive Control (MPC) for gait generation, LIP model, TALOS and Atlas examples."
+avoiding.php,"Optical obstacle avoidance using Octomap/Voxel Grid, center of mass adjustment, soft vs rigid obstacles."
+navigating.php,"SLAM (Simultaneous Localization and Mapping), global path planning (D*, Informed RRT*), footstep planning."
+team.php,"Displays team members (Lamar, Jana, Layan, Renad) and supervisor Dr. Mona Alawadh."
+logout.php,Destroys session and shows a logout confirmation page with return link.
+
+ ## Styling and Navigation
+Styling: All pages use CSS with dark theme (#0A0E1A background, #2A6F9C accent), Inter font from Google Fonts, and Font Awesome 6 icons.
+
+Responsive Design: Fully responsive with media queries for screens under 768px and 900px.
+
+Sidebar Navigation: Available on home.php, walking.php, avoiding.php, navigating.php, and team.php. Open using the hamburger menu icon (three bars).
+
+
+##  Development Environment
+Device name: shamesx
+
+Processor: 13th Gen Intel(R) Core(TM) i7-1355U (1.70 GHz)
+
+RAM: 16.0 GB (15.7 GB usable)
+
+Graphics: NVIDIA GeForce RTX 2050 (4 GB) + Intel Iris Xe Graphics
+
+OS: Windows 11 Home (64-bit)
+
+
+
+
+## Troubleshooting"Cannot connect to database": Ensure MySQL is running in XAMPP,
+ check credentials in db_config.php, and verify my_website_db exists.Login redirects back to login page:
+ Confirm the users table contains at least one record and $_SESSION['user'] is set correctly.
+White screen or PHP errors: Enable error reporting by adding this code to the top of the file:
+
+error_reporting(E_ALL);
 ini_set('display_errors', 1);
-Sidebar not working: Check JavaScript console for errors and verify element IDs (hamburger, sidebar, overlay).Images not loading: Reconnect to the internet (Unsplash URLs are external) or replace src attributes with local file paths.🛡️ Security Recommendations for ProductionReplace plain text password comparison with password_hash() and password_verify().Use prepared statements for all database queries.Add CSRF tokens to the login form.Implement rate limiting on login attempts.Move database credentials outside the document root.Enable HTTPS.📄 License and Copyright© 2026 AZURE ROBOTICS - Humanoid Autonomy for Extreme Environments. All content is for educational and demonstration purposes.
-License and Copyright
-(c) 2026 AZURE ROBOTICS - Humanoid Autonomy for Extreme Environments. All content is for educational and demonstration purposes.
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+Security Recommendations for Production
+Replace plain text password comparison with password_hash() and password_verify().
+
+Use prepared statements for all database queries.
+
+Add CSRF tokens to the login form.
+
+Implement rate limiting on login attempts.
+
+Move database credentials outside the document root.
+
+Enable HTTPS
+
+## License and Copyright
+© 2026 AZURE ROBOTICS - Humanoid Autonomy for Extreme Environments. All content is for educational and demonstration purposes.
