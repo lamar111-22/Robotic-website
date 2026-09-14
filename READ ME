@@ -1,0 +1,178 @@
+# Azure Robotics Website - Technical README
+
+A web-based control system that provides secure login, protected pages, and multiple robot-related interfaces such as walking control, SLAM navigation, and obstacle avoidance.  
+The project is built using **PHP, MySQL, HTML, and CSS**.
+
+---
+
+## Features
+
+- Secure login system using **PHP Sessions**
+-  Protected pages with automatic redirection if the user is not  logged in
+-  Modern dark UI design
+-  Animated sidebar with blur effects
+-  Multiple robot system pages:
+  - Balance & Walking Control
+  - Walking Gait Control
+  - Optical Obstacle Avoidance
+  - Real-World Navigation (SLAM)
+  - Team Page
+
+
+---
+
+
+##  Project Structure
+
+/project-folder
+ index.php          # Login page (session authentication)
+ home.php           # Balance & Walking control systems
+ walking.php        # Walking gait control
+ avoiding.php       # Optical obstacle avoidance 
+ navigating.php     # Real-world navigation using SLAM
+  team.php          # Team information page
+ logout.php         # Session destroy and logout page
+ db_config.php      # Database configuration
+ README.md          # Documentation file
+
+--- 
+
+## System Requirements
+
+| Component | Requirement |
+|-----------|-------------|
+| Web Server | Apache (XAMPP recommended) |
+| PHP | Version 7.4 or higher |
+| Database | MySQL 5.7 or higher |
+| Operating System | Windows / Linux / macOS (tested on Windows 11) |
+
+---
+
+## Database Structure
+
+User table:
+
+| Field     | Type              |
+|-----------|-------------------|
+| username  | VARCHAR           |
+| email     | VARCHAR           |
+| password  | VARCHAR           |
+
+
+## How to Start the Database (my_website_db)
+
+Follow these steps to set up and start the project database using XAMPP:
+
+1. **Open XAMPP Control Panel**
+
+2. **Start Required Services:**
+   - Start Apache
+   - Start MySQL
+
+3. **Open phpMyAdmin**  
+   Go to: `http://localhost/phpmyadmin`
+
+4. **Create a New Database**  
+   Click on "New" in the left sidebar, then create a database named: `my_website_db`
+
+5. **Import the SQL File**  
+   - Click on the database name `my_website_db`
+   - Go to the "Import" tab
+   - Click "Choose File"
+   - Select the file: `my_website_db (1).sql`
+   - Press "Go" to import the tables and data
+
+---
+
+## Database Configuration File (db_config.php)
+
+The file `db_config.php` already contains:
+
+```php
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$dbname = 'my_website_db';
+$port = 3306;
+
+If your MySQL has a password, update the $pass variable accordingly.
+
+ Open your browser and go to:
+http://localhost/robot_site/index.php
+
+
+---
+
+##  Development Environment (Your Device Specs)
+
+Component	                  Specification
+Processor	                  Intel Core i7-1355U
+RAM	                        16 GB
+GPU	                        NVIDIA RTX 2050
+Integrated Graphics	        Intel Iris Xe Graphics
+OS	                        Windows 11 Home (Version 25H2)
+Architecture	              64-bit system
+Storage                    	954 GB (172 GB used)
+---
+
+## Styling and Responsive Design
+All pages use CSS with dark theme (#0A0E1A background, #2A6F9C accent).
+Fonts: Inter from Google Fonts.
+Icons: Font Awesome 6.
+Sidebar menu slides from left on mobile/desktop with hamburger button.
+Fully responsive (media queries for max-width 768px and 900px).
+
+
+---
+
+## Important Notes
+
+Important Notes
+The project uses plain text passwords. For production, implement password_hash() and password_verify()
+
+Images are loaded from Unsplash placeholders. You may replace with local images
+
+Session is started in db_config.php if not already active, ensuring consistent session handling
+
+ ---
+
+##  Security Notes
+
+ Passwords are currently stored in plain text → recommended to use password_hash()
+
+ Consider adding CSRF protection
+
+ Consider adding rate limiting for login attempts
+---
+
+
+## Troubleshooting
+
+- "Cannot connect to database"
+Ensure MySQL is running in XAMPP.
+Check credentials in db_config.php.
+Verify database name my_website_db exists.
+
+- Login redirects back to login page
+Confirm the users table contains at least one record.
+Check that $_SESSION['user'] is being set correctly in index.php.
+Ensure no output before session_start().
+
+
+- White screen or PHP errors
+Enable error reporting by adding at the top of the problematic file: php
+
+- error_reporting(E_ALL);
+ini_set('display_errors', 1);
+Check PHP error logs in C:\xampp\php\logs\.
+
+- Sidebar not working
+Verify JavaScript console for errors.
+Ensure the hamburger, sidebar, and overlay element IDs are correct.
+
+- Images not loading
+The site uses external Unsplash URLs. If offline, replace src attributes with local image paths.
+
+##  License
+
+Private project — not intended for public distribution.
